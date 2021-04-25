@@ -45,6 +45,36 @@ public class Archivo {
 		return false;
 	}
 
+	
+	public TreeSet<Persona> Leer() {
+		FileReader entrada;
+		TreeSet<Persona>listaTreeSet= new TreeSet<Persona>();
+		String [] listaPersona;
+		ArrayList<Persona> lista = new ArrayList<Persona>();
+		try {
+			entrada= new FileReader(RUTA);
+			BufferedReader buffer= new BufferedReader(entrada);
+			String linea= null;
+			while((linea = buffer.readLine())!= null)
+			{
+				Persona persona= new Persona();
+				listaPersona= linea.split("-");
+				persona.setNombre(listaPersona[0]);
+				persona.setApellido(listaPersona[1]);
+				persona.setDNI(Integer.parseInt(listaPersona[2]));
+				lista.add(persona);
+			}
+			buffer.close();
+			entrada.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		listaTreeSet.addAll(lista);
+		return listaTreeSet;
+	}
+	
 	public String getRUTA() {
 		return RUTA;
 	}
