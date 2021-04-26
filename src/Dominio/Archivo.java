@@ -20,6 +20,8 @@ public class Archivo {
 
 	private String RUTA;
 	
+	
+	
 	public boolean Existe() {
 		
 		File archivo= new File(RUTA);
@@ -75,12 +77,29 @@ public class Archivo {
 		return listaTreeSet;
 	}
 	
+	
+	public boolean Escribir(TreeSet<Persona> lista) {
+		try {
+			BufferedWriter bufferW= new BufferedWriter(new OutputStreamWriter(new FileOutputStream(RUTA), "UTF8"));
+			for(Persona e:lista) {
+				bufferW.write(e.getNombre() + " " + e.getApellido());
+				bufferW.newLine();
+			}
+			bufferW.close();
+			return true;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public String getRUTA() {
 		return RUTA;
 	}
 
-	public void setRUTA(String rUTA) {
-		RUTA = rUTA;
+	public void setRUTA(String ruta) {
+		RUTA = ruta;
 	}
 
 }
